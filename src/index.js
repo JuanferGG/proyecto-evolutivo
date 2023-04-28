@@ -1,7 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+
+// TODO importamos bootstrap
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap-icons/font/bootstrap-icons.css'
+
+//! Los estilos propios deben ir debajo del bootstrap para que asi no los pise el bootstrap
 import './index.css';
 import App from './App';
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
