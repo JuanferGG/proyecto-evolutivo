@@ -21,6 +21,7 @@ const Child = ({ name, send, update }) => {
     function submitName(e){
         e.preventDefault()
         update(nameRef.current.value)
+        nameRef.current.value = ''
     }
 
     return (
