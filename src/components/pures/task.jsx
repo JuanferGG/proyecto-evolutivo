@@ -6,7 +6,7 @@ import { levels } from '../../models/levels.enum';
 // * Importamos la Hoja de estilos
 import '../../styles/task.css'
 
-const TaskComponent = ( { task } ) => {
+const TaskComponent = ( { task, complete, deleteTask } ) => {
 
     useEffect(() => {
         console.log('Tarea creada')
@@ -39,13 +39,13 @@ const TaskComponent = ( { task } ) => {
     }
 
     /**
-     * Function that return icon depending on completion of the task
+     ** Function that return icon depending on completion of the task
      */
     function taskCompletedIcon(){
         if(task.completed){
-            return (<i className='bi-toggle-on' style={{color: 'green'}}></i>) 
+            return (<i onClick={() => complete(task)} className='bi-toggle-on task-action' style={{color: 'green'}}></i>) 
         } else {
-            return (<i className='bi-toggle-off' style={{color: 'grey'}}></i>)
+            return (<i onClick={() => complete(task)} className='bi-toggle-off task-action' style={{color: 'grey'}}></i>)
         }
     }
 
@@ -54,31 +54,27 @@ const TaskComponent = ( { task } ) => {
             <th>
                 <span className='ms-2'>{ task.name }</span>
             </th>
-            <td className='aling-middel'>
+            <td className='align-middel'>
                 <span>{ task.description }</span>
             </td>
-            <td className='aling-middel'>
+            <td className='align-middel'>
                 {/* TODO Execution of Function to return badge element */}
                 {taskLevelBadge()}
             </td>
-            <td className='aling-middel'>
+            <td className='align-middel'>
                 {/* TODO Execution of Function to return icon depending on completion */}
                 {taskCompletedIcon()}
-                <i className='bi bi-trash' style={ {color: 'tomato', fontWeight: 'bold'} }></i>
+                <i onClick={() => deleteTask(task)} className='bi bi-trash task-action' style={ {color: 'tomato', fontWeight: 'bold'} }></i>
             </td>
         </tr>
-        // {/* <div>
-        //     <h2 className='task-name'>Nombre: { task.name }</h2>
-        //     <h3>Descripcíon: { task.description }</h3>
-        //     <h4>Level: { task.level }</h4>
-        //     <h5>Esta tarea esta: { task.completed ? 'COMPLETED' : 'PENDING' }</h5>
-        // </div> */}
     );
 };
 
 
 TaskComponent.propTypes = {
-    task: PropTypes.instanceOf(Task)
+    task: PropTypes.instanceOf(Task).isRequired,
+    complete: PropTypes.func.isRequired,
+    deleteTask: PropTypes.func.isRequired
 };
 
 

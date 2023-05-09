@@ -13,7 +13,7 @@ const TaskListComponent = () => {
 
     const defaultTask1 = new Task('Example 1', 'Description 1', true, levels.NORMAL)
     const defaultTask2 = new Task('Example 2', 'Description 2', false, levels.URGENT)
-    const defaultTask3 = new Task('Example 3', 'Description 2', false, levels.BLOCKING)
+    const defaultTask3 = new Task('Example 3', 'Description 3', false, levels.BLOCKING)
 
     // Estado del componente
     const [tasks, setTasks] = useState([defaultTask1, defaultTask2, defaultTask3]);
@@ -29,8 +29,28 @@ const TaskListComponent = () => {
         };
     }, [tasks]);
 
-    const changeCompleted = (id) => {
-        console.log('TODO: cambiar estado de una tarea')
+    function completeTask(task){
+        // console.log(`Complete this Task: `, task)
+        const index = tasks.indexOf(task)
+        const tempTask = [...tasks]
+        tempTask[index].completed = !tempTask[index].completed
+        // TODO We update the state of the component and it will update the iteration of the tasks in order to show the task update
+        setTasks(tempTask)
+    }
+
+    function deleteTask(task){
+        // console.log(`Delete this Task: `, task)
+        const index = tasks.indexOf(task)
+        const tempTask = [...tasks]
+        tempTask.splice(index,1)
+        setTasks(tempTask)
+    }
+
+    function addTask(task){
+        console.log(`Task Create this Task: `, task)
+        const tempTask = [...tasks]
+        tempTask.push(task)
+        setTasks(tempTask)
     }
 
     return (
@@ -47,7 +67,7 @@ const TaskListComponent = () => {
                             <thead>
                                 <tr>
                                     <th scope='col'>Title</th>
-                                    <th scope='col'>Descrption</th>
+                                    <th scope='col'>Description</th>
                                     <th scope='col'>Priority</th>
                                     <th scope='col'>Actions</th>
                                 </tr>
@@ -55,14 +75,14 @@ const TaskListComponent = () => {
                             <tbody>
                                 {/* Iterar sobre una lista de tareas */}
                                 { tasks.map((task, index) => {
-                                    return <TaskComponent key={index} task={task}></TaskComponent>
+                                    return <TaskComponent key={index} task={task} complete={completeTask} deleteTask={deleteTask}></TaskComponent>
                                 }) }
                             </tbody>
                         </table>
                     </div>
-                    <TaskForm></TaskForm>
                 </div>
             </div>
+            <TaskForm add={addTask}></TaskForm>
         </div>
     );
 };
