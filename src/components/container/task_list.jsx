@@ -22,7 +22,7 @@ const TaskListComponent = () => {
     // Control de Ciclo de vida del componente
 
     useEffect(() => {
-        console.log('Modificacion de tareas');
+        // console.log('Modificacion de tareas');
         setLoading(false);
         return () => {
             console.log('Tasklist component is going to unMount...');
@@ -47,7 +47,7 @@ const TaskListComponent = () => {
     }
 
     function addTask(task){
-        console.log(`Task Create this Task: `, task)
+        // console.log(`Task Create this Task: `, task)
         const tempTask = [...tasks]
         tempTask.push(task)
         setTasks(tempTask)

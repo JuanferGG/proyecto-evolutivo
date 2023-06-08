@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { levels } from '../../../models/levels.enum';
 import { Task } from '../../../models/task.class';
 
-
 const TaskForm = ({ add }) => {
     
     const nameRef = useRef('')
