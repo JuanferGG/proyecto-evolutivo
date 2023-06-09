@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
+
+//? Models
 import { Task }  from '../../models/task.class';
 import { levels } from '../../models/levels.enum';
 
@@ -49,8 +51,21 @@ const TaskComponent = ( { task, complete, deleteTask } ) => {
         }
     }
 
+    const taskCompleted = {
+        backGroundColor: 'tomato',
+        color: 'gray',
+        fontWeight: 'bold',
+        textDecoration: 'line-through wavy red'
+    }
+    const taskPending = {
+        color: 'black',
+        fontWeight: 'bold',
+    }
+
+
+
     return (
-        <tr className='fw-normal'>
+        <tr style={task.completed ? taskCompleted : taskPending}>
             <th>
                 <span className='ms-2'>{ task.name }</span>
             </th>

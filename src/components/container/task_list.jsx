@@ -23,13 +23,15 @@ const TaskListComponent = () => {
 
     useEffect(() => {
         // console.log('Modificacion de tareas');
-        setLoading(false);
+        setTimeout(() => {
+            setLoading(false);
+        }, 2000);
         return () => {
             console.log('Tasklist component is going to unMount...');
         };
     }, [tasks]);
 
-    function completeTask(task){
+    function completeTask(task) {
         // console.log(`Complete this Task: `, task)
         const index = tasks.indexOf(task)
         const tempTask = [...tasks]
@@ -38,51 +40,82 @@ const TaskListComponent = () => {
         setTasks(tempTask)
     }
 
-    function deleteTask(task){
+    function deleteTask(task) {
         // console.log(`Delete this Task: `, task)
         const index = tasks.indexOf(task)
         const tempTask = [...tasks]
-        tempTask.splice(index,1)
+        tempTask.splice(index, 1)
         setTasks(tempTask)
     }
 
-    function addTask(task){
+    function addTask(task) {
         // console.log(`Task Create this Task: `, task)
         const tempTask = [...tasks]
         tempTask.push(task)
         setTasks(tempTask)
     }
 
+    const styleTable = {
+        width: '100%',
+    }
+
+    const Table = () => {
+        return (
+            <table style={styleTable}>
+                <thead>
+                    <tr>
+                        <th scope='col'>Title</th>
+                        <th scope='col'>Description</th>
+                        <th scope='col'>Priority</th>
+                        <th scope='col'>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {/* Iterar sobre una lista de tareas */}
+                    {tasks.map((task, index) => {
+                        return <TaskComponent key={index} task={task} complete={completeTask} deleteTask={deleteTask}></TaskComponent>
+                    })}
+                </tbody>
+            </table>
+        )
+    }
+
+    let tasksTable
+
+    if(tasks.length > 0){
+        tasksTable = <Table/>
+    } else {
+        tasksTable = (
+            <div>
+                <h3 style={{textAlign: 'center'}}>There aren't Tasks !</h3>
+                <h5 style={{textAlign: 'center'}}>Please, create one</h5>
+            </div>
+        )
+    }
+
+    const loadingStyle = {
+        color: 'grey',
+        fontSize: '30px',
+        fontWeight: 'bold'
+    }
+
     return (
-        <div>
+        <div style={{width: '35vw', display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
             <div className='col-12'>
                 <div className='card'>
                     {/* Card Header */}
                     <div className='card-header p-3'>
-                        <h5 style={{textAlign: 'center'}}>Your Tasks:</h5>
+                        <h5 style={{ textAlign: 'center' }}>Your Tasks:</h5>
                     </div>
                     {/* Card Body */}
-                    <div className='card-body' data-md-perfect-scrollbar='true' style={ {position: 'relative', height: '400px'} }>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th scope='col'>Title</th>
-                                    <th scope='col'>Description</th>
-                                    <th scope='col'>Priority</th>
-                                    <th scope='col'>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {/* Iterar sobre una lista de tareas */}
-                                { tasks.map((task, index) => {
-                                    return <TaskComponent key={index} task={task} complete={completeTask} deleteTask={deleteTask}></TaskComponent>
-                                }) }
-                            </tbody>
-                        </table>
+                    <div className='card-body' data-md-perfect-scrollbar='true' style={{ position: 'relative', height: '400px' }}>
+                        {/* Add loading Spinner */}
+                        {loading ? (<p style={loadingStyle}>Loading Task</p>) : tasksTable}
+
                     </div>
                 </div>
             </div>
-            <TaskForm add={addTask}></TaskForm>
+            <TaskForm add={addTask} length={tasks.length}></TaskForm>
         </div>
     );
 };
