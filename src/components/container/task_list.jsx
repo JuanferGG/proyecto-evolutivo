@@ -100,7 +100,7 @@ const TaskListComponent = () => {
     }
 
     return (
-        <div style={{width: '35vw', display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+        <div style={{width: 'fit-content', display: 'flex', flexDirection: 'column', alignItems: 'center',}}>
             <div className='col-12'>
                 <div className='card'>
                     {/* Card Header */}
