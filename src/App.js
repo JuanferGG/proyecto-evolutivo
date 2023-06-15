@@ -1,7 +1,7 @@
 import './App.css';
+import RegisterFormik from './components/pures/Forms/registerFormik';
 // import Father from './components/container/father';
-import TaskListComponent from './components/container/task_list';
-import LoginFormik from './components/pures/Forms/loginFormik';
+// import LoginFormik from './components/pures/Forms/loginFormik';
 import './index.css'
 
 function App() {
@@ -10,7 +10,8 @@ function App() {
       {/* <Father></Father> */}
       {/* <TaskListComponent/> */}
       {/* Ejemplos  */}
-      <LoginFormik/>
+      {/* <LoginFormik/> */}
+      <RegisterFormik />
     </div>
   );
 }
