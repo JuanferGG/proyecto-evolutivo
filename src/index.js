@@ -8,11 +8,13 @@ import 'bootstrap-icons/font/bootstrap-icons.css'
 //! Los estilos propios deben ir debajo del bootstrap para que asi no los pise el bootstrap
 import './index.css';
 import App from './App';
+import AppRoutingOne from './appRoutingOne';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <App />
+    // <App />
+    <AppRoutingOne/>
 );
 
 // If you want to start measuring performance in your app, pass a function
